@@ -36,8 +36,8 @@ router.post("/", validateProjectPost, (req, res) => {
     });
 });
 
-router.delete("/:id", (req, res) => {
-  Projects.delete(req.params.id)
+router.delete("/:id", validateProjectId, (req, res) => {
+  Projects.remove(req.params.id)
     .then(result => {
       res.status(200).json({ message: "Deletion was successful." });
     })
@@ -46,7 +46,7 @@ router.delete("/:id", (req, res) => {
     });
 });
 
-router.put("/:id", (req, res) => {
+router.put("/:id", validateProjectId, (req, res) => {
   Projects.update(req.params.id, req.body)
     .then(result => {
       res.status(200).json({ message: "Update was successful." });
