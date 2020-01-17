@@ -16,7 +16,7 @@ router.get("/", (req, res) => {
     });
 });
 
-router.get("/:id", (req, res) => {
+router.get("/:id", validateProjectId, (req, res) => {
   Projects.get(req.params.id)
     .then(result => {
       res.status(200).json(result);
@@ -26,7 +26,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.post("/", (req, res) => {
+router.post("/", validateProjectPost, (req, res) => {
   Projects.insert(req.body)
     .then(result => {
       res.status(200).json({ message: "Creation was successful." });
@@ -111,5 +111,23 @@ router.put("/:id/actions/:actionid", (req, res) => {
       res.status(500).json({ error: "Something went wrong." });
     });
 });
+
+// bit of middleware
+
+function validateProjectId(req, res, next) {
+  Projects.get(req.params.id).then(result => {
+    result === null
+      ? res.status(400).json({ error: "project not found" })
+      : next();
+  });
+}
+
+function validateProjectPost(req, res, next) {
+  if (Object.keys(req.body).length === 0) {
+    res.status(400).json({ error: "No content for post detected" });
+  } else if (!req.body.name || !req.body.description) {
+    res.status(400).json({ error: "Please include all required fields." });
+  } else next();
+}
 
 module.exports = router;
