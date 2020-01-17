@@ -39,14 +39,22 @@ Commit your code regularly and use descriptive messages. This helps both you (in
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your Team Lead.
 
 - [ ] Mention two parts of Express that you learned about this week.
+      Server and router. Server is a built in app that makes it easy to create an API. Router is like a mini-app that makes it
+      easy to create various routing for different endpoints.
 
 - [ ] Describe Middleware?
+      Middleware is some kind of function that runs in between two processes. In our case, it takes in a request from a client
+      and can perform tests/alter the data the server receives.
 
 - [ ] Describe a Resource?
+      A resource is any kind of data stored on the backend that will be pulled for use on the front end.
 
 - [ ] What can the API return to help clients know if a request was successful?
+      It can either return the specific data the user was interacting/requesting or a message relaying success.
 
 - [ ] How can we partition our application into sub-applications?
+      The wording is weird here but I would imagine this is referencing express.Router(). It allows us to have separate organized
+      file systems and processes for various different endpoints.
 
 ## Minimum Viable Product
 
